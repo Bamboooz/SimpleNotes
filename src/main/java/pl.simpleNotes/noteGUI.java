@@ -2,9 +2,7 @@ package pl.simpleNotes;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Objects;
 
 import static pl.simpleNotes.makeNewNote.newNoteName;
@@ -12,6 +10,7 @@ import static pl.simpleNotes.makeNewNote.newNoteName;
 public class noteGUI {
 
     public static String fileText;
+    public static File filePath;
 
     public static void note() {
         JFrame frame = new JFrame("| Simple Notes |");
@@ -36,19 +35,27 @@ public class noteGUI {
         utilsMenu.add(menu);
 
         JTextArea noteText = new JTextArea();
-        frame.add(noteText);
         noteText.setVisible(true);
-        noteText.setBounds(0, 0, 748, 880);
+        JScrollPane scrollBar = new JScrollPane(noteText);
+        scrollBar.setBounds(0, 0, 728, 860);
+        frame.add(scrollBar);
 
         final JMenuItem saveAs = new JMenuItem("Save As:");
         saveAs.addActionListener((e -> {
 
-                fileText = noteText.getText();
+            JFileChooser f = new JFileChooser();
+            f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            f.showSaveDialog(null);
+
+            filePath = (f.getSelectedFile());
+            fileText = noteText.getText();
+
                 try {
-                    File txtFile = new File(newNoteName);
+                    File txtFile = new File (filePath, fileText);
                     if (txtFile.createNewFile()) {
+                        txtFile.delete();
                         System.out.println("File created: " + txtFile.getName());
-                        FileWriter myWriter = new FileWriter(newNoteName);
+                        FileWriter myWriter = new FileWriter(new File(filePath, String.valueOf(newNoteName)));
                         myWriter.write(fileText);
                         myWriter.close();
                     } else {
@@ -62,6 +69,43 @@ public class noteGUI {
         }));
 
         menu.add(saveAs);
+
+        final JMenuItem openFile = new JMenuItem("Open File:");
+        openFile.addActionListener((e -> {
+            JFileChooser fileChooser=new JFileChooser();
+            int a=fileChooser.showOpenDialog(null);
+            if(a==JFileChooser.APPROVE_OPTION)
+            {
+                File fileToOpen = fileChooser.getSelectedFile();
+                try
+                {
+                    newNoteName = fileToOpen;
+                    frame.setTitle("| Simple Notes, Note: " + "'" + newNoteName.toString() + "'" + " |");
+                    BufferedReader br = new BufferedReader(new FileReader(fileToOpen));
+
+                    try {
+                        StringBuilder sb = new StringBuilder();
+                        String line = br.readLine();
+
+                        while (line != null) {
+                            sb.append(line);
+                            sb.append("\n");
+                            line = br.readLine();
+                        }
+                        String everything = sb.toString();
+                        noteText.setText(everything);
+                    } finally {
+                        br.close();
+                    }
+                }
+                catch(Exception exception)
+                {
+                    System.out.println("Problem found when to open the file");
+                }
+            }
+        }));
+
+        menu.add(openFile);
 
     }
 

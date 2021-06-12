@@ -2,13 +2,14 @@ package pl.simpleNotes;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.Objects;
 
 import static pl.simpleNotes.noteGUI.*;
 
 public class makeNewNote {
 
-    public static String newNoteName;
+    public static File newNoteName;
 
     public static void createNewNote() {
         JFrame newNoteFrame = new JFrame("| Simple Notes - Create New Note|");
@@ -21,7 +22,7 @@ public class makeNewNote {
         newNoteFrame.setLayout(null);
         newNoteFrame.setLocationRelativeTo(null);
         newNoteFrame.setResizable(false);
-        newNoteFrame.setTitle("| Simple Notes|");
+        newNoteFrame.setTitle("| Simple Notes |");
         newNoteFrame.setSize(348, 225);
         newNoteFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -39,7 +40,7 @@ public class makeNewNote {
 
         submit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                newNoteName = ((noteNameSpace.getText()) + ".txt");
+                newNoteName = new File(((noteNameSpace.getText()) + ".txt"));
                 note();
                 newNoteFrame.setVisible(false);
             }
