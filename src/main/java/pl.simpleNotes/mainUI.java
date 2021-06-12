@@ -13,6 +13,7 @@ import static pl.simpleNotes.noteGUI.*;
 class mainUI {
 
     public static String runEverything = "";
+    public static String isNoteOpened = "0";
 
     public static void main(String[] args) {
 
@@ -65,7 +66,7 @@ class mainUI {
 
         openNote.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                JFileChooser fileChooser=new JFileChooser();
+                JFileChooser fileChooser = new JFileChooser();
                 int a=fileChooser.showOpenDialog(null);
                 if(a==JFileChooser.APPROVE_OPTION)
                 {
@@ -85,7 +86,8 @@ class mainUI {
                                 line = br.readLine();
                             }
                             runEverything = sb.toString();
-                            ifNoteOpened();
+                            isNoteOpened = "1";
+                            note();
                         } finally {
                             frame.setVisible(false);
                         }
