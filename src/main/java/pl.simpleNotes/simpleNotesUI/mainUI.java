@@ -1,4 +1,4 @@
-package pl.simpleNotes;
+package pl.simpleNotes.simpleNotesUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,10 +7,10 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.Objects;
 
-import static pl.simpleNotes.makeNewNote.*;
-import static pl.simpleNotes.noteGUI.*;
+import static pl.simpleNotes.simpleNotesEngine.makeNewNote.*;
+import static pl.simpleNotes.simpleNotesUI.noteGUI.*;
 
-class mainUI {
+public class mainUI {
 
     public static String runEverything = "";
     public static String isNoteOpened = "0";

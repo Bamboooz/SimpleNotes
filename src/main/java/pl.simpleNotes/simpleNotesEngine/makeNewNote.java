@@ -1,11 +1,13 @@
-package pl.simpleNotes;
+package pl.simpleNotes.simpleNotesEngine;
+
+import pl.simpleNotes.simpleNotesUI.mainUI;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.util.Objects;
 
-import static pl.simpleNotes.noteGUI.*;
+import static pl.simpleNotes.simpleNotesUI.noteGUI.*;
 
 public class makeNewNote {
 
