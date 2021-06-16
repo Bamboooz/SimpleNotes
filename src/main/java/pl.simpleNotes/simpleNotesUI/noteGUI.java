@@ -292,14 +292,14 @@ public class noteGUI {
         final JMenuItem changeTextColor = new JMenuItem("Change Text Color: ");
         changeTextColor.addActionListener((e -> {
 
-            startTextColorPicker();
+            startColorPicker("Text");
 
         }));
 
         final JMenuItem changeBackgroundColor = new JMenuItem("Change Background Color: ");
         changeBackgroundColor.addActionListener((e -> {
 
-            startBackgroundColorPicker();
+            startColorPicker("Background");
 
         }));
 
@@ -324,6 +324,7 @@ public class noteGUI {
         edit.add(copy);
         edit.add(pasteText);
         edit.add(cutText);
+        edit.add(changeFont);
         edit.add(changeTextColor);
         edit.add(changeBackgroundColor);
         edit.add(replaceTextWith);

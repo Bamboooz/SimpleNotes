@@ -62,7 +62,6 @@ class FontChooser extends JPanel //implements ActionListener
     {
         thisFont=withFont;
 
-////////////////////
         String[] fontNames=
                 GraphicsEnvironment
                         .getLocalGraphicsEnvironment()
