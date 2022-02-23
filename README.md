@@ -1,3 +1,3 @@
 # SimpleNotes
-Simple Notepad
+ Simple Notepad
 Just Simple Notepad
